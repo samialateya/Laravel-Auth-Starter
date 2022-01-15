@@ -1,6 +1,6 @@
 ## About Auth Starter
 
-Its a [Laravel 8](https://laravel.com/docs) authentication markdown witch will help you to understand and grasp all the underlying functionality for Session and API Authentication witch include:
+It's  a [Laravel 8](https://laravel.com/docs) authentication markdown that will help you to understand and grasp all the underlying functionality for Session and API Authentication which include:
 - User & Admin Sessions
 - Admin Roles & Permissions
 - Authentication Middleware for Users and Admins
@@ -10,11 +10,11 @@ Its a [Laravel 8](https://laravel.com/docs) authentication markdown witch will h
 - Auth Sanctum
 - Notifications
 
-feel free use it as a startup for your next laravel project
+feel free to use it as a startup for your next Laravel project
 
 ## User Features
 
-User have the following features provided as Web and API
+User has the following features provided as Web and API
 
 - Routing
 - Email & Password Authentication
@@ -29,7 +29,7 @@ User have the following features provided as Web and API
 
 ## Admin Features
 
-Admin have the following features provided as Web and API
+Admin has the following features provided as Web and API
 
 - Routing
 - Email & Password Authentication
@@ -86,4 +86,4 @@ Feel free to fork this repo and submit a pull request with your updates
 
 ## Errors and Vulnerabilities
 
-Please open an issue on Github if you discover a vulnerability with AuthStarter or you face and error or feel free to contact me on [samialateya@hotmail.com](mailto:samialateya@hotmail.com)
+Please open an issue on Github if you discover a vulnerability with AuthStarter or you face an error or feel free to contact me on my email [samialateya@hotmail.com](mailto:samialateya@hotmail.com)
