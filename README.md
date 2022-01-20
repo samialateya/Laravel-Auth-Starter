@@ -86,4 +86,5 @@ Feel free to fork this repo and submit a pull request with your updates
 
 ## Errors and Vulnerabilities
 
-Please open an issue on Github if you discover a vulnerability with AuthStarter or you face an error or feel free to contact me on my email [samialateya@hotmail.com](mailto:samialateya@hotmail.com)
+Please open an issue on Github if you discover a vulnerability or you face an error with this repo.
+and feel free to contact me at [samialateya@hotmail.com](mailto:samialateya@hotmail.com)
