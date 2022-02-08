@@ -45,7 +45,10 @@ class ProfileController extends Controller
 		$user->avatar = $avatarName;
 		$user->save();
 
-		return response(['message' => 'Profile has been updated successfully'], 200);
+		//Get new avatar link
+		$avatarLink = asset($user->getAvatarLink());
+
+		return response(['message' => 'Profile has been updated successfully', 'avatar' => $avatarLink], 200);
 	}
 
 	//remove avatar
@@ -58,6 +61,8 @@ class ProfileController extends Controller
 		//TODO set avatar name to null in to users table
 		$user->avatar = null;
 		$user->save();
-		return response(['message' => 'Profile image has been removed successfully'], 200);
+		//Get default avatar link
+		$avatarLink = asset($user->getAvatarLink());
+		return response(['message' => 'Profile image has been removed successfully', 'defaultAvatar' => $avatarLink], 200);
 	}
 }

@@ -38,7 +38,7 @@
 		</div>
 		<!-- submit button -->
 		<div class="mb-3">
-			<button type="submit" class="btn w-100 btn-dark">SIGN IN</button>
+			<button type="submit" class="btn w-100 btn-dark">Update Password</button>
 		</div>
 		<!-- from footer -->
 		<div class="my-2 d-flex justify-content-between align-items-center">

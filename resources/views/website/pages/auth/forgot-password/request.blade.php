@@ -24,12 +24,12 @@
 		</div>
 		<!-- submit button -->
 		<div class="mb-3">
-			<button type="submit" class="btn w-100 btn-dark">SIGN IN</button>
+			<button type="submit" class="btn w-100 btn-dark">Reset Pssword</button>
 		</div>
 		<!-- from footer -->
 		<div class="my-2 d-flex justify-content-between align-items-center">
 			<!-- login link-->
-			<a href="{{route('website.loginPage')}}" class="text-black">Reteurn to login</a>
+			<a href="{{route('website.loginPage')}}" class="text-black">Return to login</a>
 			<!-- register link -->
 			<a href="{{route('website.registerPage')}}" class="text-black">Dont have account?</a>
 		</div>
