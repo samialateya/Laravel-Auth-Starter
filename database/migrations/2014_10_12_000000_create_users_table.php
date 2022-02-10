@@ -18,7 +18,8 @@ class CreateUsersTable extends Migration
             $table->string('name');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
+						//?the password is nullable because the user can login with social media
+            $table->string('password')->nullable();
 						//define default user as a regular user not and admin
 						$table->boolean('is_admin')->default(0);
 						//setup admin type foreign key

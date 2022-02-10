@@ -1,10 +1,12 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Laravel\Socialite\Facades\Socialite;
 use App\Http\Controllers\Admin\Web\UsersController;
 use App\Http\Controllers\Admin\Web\AdminsController;
 use App\Http\Controllers\Website\Web\AuthController;
 use App\Http\Controllers\Website\Web\HomeController;
+use App\Http\Controllers\Website\Web\OAuthController;
 use App\Http\Controllers\Website\Web\ProfileController;
 use App\Http\Controllers\Admin\Web\AuthController as AdminAuthController;
 use App\Http\Controllers\Admin\Web\HomeController as AdminHomeController;
@@ -41,6 +43,12 @@ Route::name('website.')->middleware('user')->group(function () {
 		Route::get('/reset-password/{token}', [AuthController::class, 'newPasswordPage'])->name('password.reset');
 		//#update password
 		Route::post('/reset-password', [AuthController::class, 'updatePassword'])->name('password.update');
+
+		//------------------- Social login ---------------------
+		//#redirect to a OAuth provider login page
+		Route::get('/oauth/{provider}', [OAuthController::class, 'redirectToProvider'])->name('social.redirect');
+		//#execute OAuth provider login logic
+		Route::get('/oauth/{provider}/callback', [OAuthController::class, 'handleProviderCallback'])->name('social.callback');
 	});
 	//logout
 	Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth')->name('logout');

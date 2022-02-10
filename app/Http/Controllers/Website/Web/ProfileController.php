@@ -55,7 +55,9 @@ class ProfileController extends Controller
 		//catch user
 		$user = User::findOrFail($request->id);
 		//TODO remove the old picture if its exists
-		$user->avatar ? unlink(public_path(User::AVATAR_DISK_PATH) . $user->avatar) : '';
+		//?remove the image from the desk if the avatar is not taken from social media account
+		if($user->avatar && strpos($user->avatar, 'http') === false)
+			unlink(public_path(User::AVATAR_DISK_PATH) . $user->avatar);
 		//TODO set avatar name to null in to users table
 		$user->avatar = null;
 		$user->save();

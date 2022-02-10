@@ -44,13 +44,14 @@ class User extends Authenticatable implements MustVerifyEmail
 
 	//returns user's profile image
 	public function getAvatarLink(){
-		//if a user uploads an image
-		if($this->avatar)
-			//return the path of the image
-			return asset(self::AVATAR_HTTP_PATH.$this->avatar);
-		else
-			//return the default avatar
-			return asset(self::AVATAR_HTTP_PATH.'default.svg');
+		//?if user dose not uploads an image yet return default avatar
+		if(!$this->avatar) return asset(self::AVATAR_HTTP_PATH.'default.svg');
+		
+		//?check if the avatar stored with a full path #in case of social login user avatar
+		if(strpos($this->avatar, 'http') !== false) return $this->avatar;
+
+		//struct the url for the image and return it
+		return asset(self::AVATAR_HTTP_PATH.$this->avatar);
 	}
 
 	//check if current user is an administrator

@@ -50,6 +50,14 @@
 		<div class="text-center font-weight-light mt-3"> Allready have account?
 			<a href="{{route('website.loginPage')}}" class="text-primary">login</a>
 		</div>
+		<!-- from footer -->
+		<!-- social login -->
+		<h6 class="mt-4 text-center">Or continue with</h6>
+		<div class="d-flex justify-content-around mt-2">
+			<a href="{{ route('website.social.redirect',['google']) }}" class="btn btn-block btn-danger">Google</a>
+			<a href="{{ route('website.social.redirect',['google']) }}" class="btn btn-block btn-primary">Facebook</a>
+		</div>
+		<!--#social login -->
 	</form>
 	<!--#from-->
 </div>
