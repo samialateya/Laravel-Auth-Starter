@@ -62,7 +62,7 @@ class OAuthController extends Controller
 		$user->google_token = $OauthUserInfo->token;
 		$user->refresh_token = $OauthUserInfo->refreshToken;
 		//?set email verified if the user is verified by google and not verified yet by us
-		if ($OauthUserInfo->user['verified_email'] && !$user->email_verified) {
+		if ($OauthUserInfo->user['verified_email'] && !$user->email_verified_at) {
 			$user->email_verified_at = now();
 		}
 		//*save the user information

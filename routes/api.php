@@ -4,10 +4,10 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\API\UsersController;
 use App\Http\Controllers\Admin\API\AdminsController;
 use App\Http\Controllers\Website\API\AuthController;
+use App\Http\Controllers\Website\API\OAuthController;
 use App\Http\Controllers\Website\API\ProfileController;
 use App\Http\Controllers\Admin\API\AuthController as AdminAuthController;
 use App\Http\Controllers\Admin\API\ProfileController as AdminProfileController;
-
 
 /*
 |--------------------------------------------------------------------------
@@ -26,6 +26,9 @@ Route::prefix('user')->group(function () {
 	Route::post('/verify-email', [AuthController::class, 'sendVerificationEmail'])->middleware('auth:sanctum');
 	//logout
 	Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth:sanctum');
+	//------------------- Social login -----------------------;
+	//google login
+	Route::post('/google-login', [OAuthController::class, 'googleLogin']);
 
 	//------------------- Profile control routes -----------------------;
 	Route::prefix('/profile')->middleware('auth:sanctum')->group(function () {
