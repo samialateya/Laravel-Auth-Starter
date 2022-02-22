@@ -14,15 +14,15 @@ use App\Http\Controllers\Admin\Web\ProfileController as AdminProfileController;
 
 /*
 |--------------------------------------------------------------------------
-| website Routes
+| SECTION website Routes
 |--------------------------------------------------------------------------
 */
 
 Route::name('website.')->middleware('user')->group(function () {
-	//------------------- Home Page routes -----------------------;
+	//-------------------LINK  Home Page routes -----------------------;
 	Route::get('/', [HomeController::class, 'homePage'])->middleware('auth')->name('homePage');
 
-	//------------------- Authentication routes -----------------------;
+	//-------------------LINK  Authentication routes -----------------------;
 	Route::middleware('guest')->group(function () {
 		//render login page
 		Route::get('/login', [AuthController::class, 'loginPage'])->name('loginPage');
@@ -34,7 +34,7 @@ Route::name('website.')->middleware('user')->group(function () {
 		//execute registration logic
 		Route::post('/register', [AuthController::class, 'register'])->name('register');
 
-		//------------------- forget password ---------------------
+		//-------------------LINK  forget password ---------------------
 		//#request reset password link Page
 		Route::view('/forgot-password', 'website.pages.auth.forgot-password.request')->name('password.request');
 		//#verify user email and send reset password link
@@ -44,7 +44,7 @@ Route::name('website.')->middleware('user')->group(function () {
 		//#update password
 		Route::post('/reset-password', [AuthController::class, 'updatePassword'])->name('password.update');
 
-		//------------------- Social login ---------------------
+		//-------------------LINK  Social login ---------------------
 		//#redirect to a OAuth provider login page
 		Route::get('/oauth/{provider}', [OAuthController::class, 'redirectToProvider'])->name('social.redirect');
 		//#execute OAuth provider login logic
@@ -53,7 +53,7 @@ Route::name('website.')->middleware('user')->group(function () {
 	//logout
 	Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth')->name('logout');
 	
-	//------------------- Profile control routes -----------------------;
+	//-------------------LINK  Profile control routes -----------------------;
 	Route::prefix('/profile')->middleware('auth')->group(function (){
 		//render profile page
 		Route::get('/', [ProfileController::class, 'profilePage'])->name('profilePage');
@@ -70,13 +70,13 @@ Route::name('website.')->middleware('user')->group(function () {
 
 	});
 });
+//#website Routes !SECTION
 
 
 
+//######################## SECTION laravel needed routes ########################;
 
-//######################## laravel needed routes ########################;
-
-//---------------------- email verification routes --------------------------------
+//----------------------LINK  email verification routes --------------------------------
 Route::prefix('/verification')->name('verification.')->middleware('auth')->group(function(){
 	//view notice page to inform the user that he must verify his email
 	Route::get('/notice', [AuthController::class, 'verificationNotice'])->name('notice');
@@ -86,24 +86,24 @@ Route::prefix('/verification')->name('verification.')->middleware('auth')->group
 	Route::get('/verify/{id}/{hash}', [AuthController::class, 'acceptVerificationLink'])->middleware('signed')->name('verify');
 });
 
-//#inter new password page
+//LINK inter new password page
 Route::get('/reset-password/{token}', [AuthController::class, 'newPasswordPage'])->name('password.reset');
-
+//#LARAVEL Routes !SECTION
 
 
 
 /*
 |--------------------------------------------------------------------------
-| Admin Routes
+| SECTION Admin Routes
 |--------------------------------------------------------------------------
 */
 Route::name('admin.')->prefix('admin')->group(function () {
 	//redirect any access to primary route to dashboard route
 	Route::get('/',function (){ return redirect()->route('admin.homePage');})->middleware(['adminAuth']);
-	//------------------- Home Page routes -----------------------;
+	//-------------------LINK  Home Page routes -----------------------;
 	Route::get('/dashboard', [AdminHomeController::class, 'homePage'])->middleware(['adminAuth'])->name('homePage');
 
-	//------------------- Authentication routes -----------------------;
+	//-------------------LINK  Authentication routes -----------------------;
 	Route::middleware('adminGuest')->group(function () {
 		//render login page
 		Route::get('/login', [AdminAuthController::class, 'loginPage'])->name('loginPage');
@@ -113,7 +113,7 @@ Route::name('admin.')->prefix('admin')->group(function () {
 	//logout
 	Route::post('/logout', [AdminAuthController::class, 'logout'])->middleware(['adminAuth'])->name('logout');
 
-	//------------------- Profile control routes -----------------------;
+	//-------------------LINK  Profile control routes -----------------------;
 	Route::prefix('/profile')->middleware(['adminAuth'])->group(function () {
 		//render update profile page
 		Route::get('/update', [AdminProfileController::class, 'updateProfilePage'])->name('updateProfilePage');
@@ -123,7 +123,7 @@ Route::name('admin.')->prefix('admin')->group(function () {
 		Route::post('/updatePassword', [AdminProfileController::class, 'updatePassword'])->name('updatePassword');
 	});
 
-	//------------------- Admins control routes -----------------------;
+	//-------------------LINK  Admins control routes -----------------------;
 	Route::prefix('admins')->name('admins.')->middleware(['adminAuth'])->group(function () {
 		//show admins list
 		Route::get('/', [AdminsController::class, 'adminsListPage'])->name('listPage');
@@ -144,7 +144,7 @@ Route::name('admin.')->prefix('admin')->group(function () {
 	});
 
 
-	//------------------- users control routes -----------------------
+	//-------------------LINK  users control routes -----------------------
 	Route::prefix('users')->name('users.')->middleware('adminAuth')->group(function () {
 		//show users list
 		Route::get('/', [UsersController::class, 'usersListPage'])->name('listPage');
@@ -154,3 +154,4 @@ Route::name('admin.')->prefix('admin')->group(function () {
 		Route::post('/status', [UsersController::class, 'toggleUserStatus'])->name('toggleUserStatus');
 	});
 });
+//#admin Routes !SECTION

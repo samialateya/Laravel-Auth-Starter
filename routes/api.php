@@ -11,11 +11,11 @@ use App\Http\Controllers\Admin\API\ProfileController as AdminProfileController;
 
 /*
 |--------------------------------------------------------------------------
-| website Routes
+| SECTION website Routes
 |--------------------------------------------------------------------------
 */
 Route::prefix('user')->group(function () {
-	//------------------- Authentication routes -----------------------;
+	//-------------------LINK  Authentication routes -----------------------;
 	//login
 	Route::post('/login', [AuthController::class, 'login']);
 	//register
@@ -30,7 +30,7 @@ Route::prefix('user')->group(function () {
 	//google login
 	Route::post('/google-login', [OAuthController::class, 'googleLogin']);
 
-	//------------------- Profile control routes -----------------------;
+	//-------------------LINK  Profile control routes -----------------------;
 	Route::prefix('/profile')->middleware('auth:sanctum')->group(function () {
 		//get profile information
 		Route::get('/', [ProfileController::class, 'getProfileInfo']);
@@ -44,15 +44,15 @@ Route::prefix('user')->group(function () {
 		});
 	});
 });
-
+//#website Routes !SECTION
 
 /*
 |--------------------------------------------------------------------------
-| Admin Routes
+| SECTION Admin Routes
 |--------------------------------------------------------------------------
 */
 Route::name('admin.')->prefix('admin')->group(function () {
-	//------------------- Authentication routes -----------------------;
+	//-------------------LINK  Authentication routes -----------------------;
 	Route::name('auth.')->group(function () {
 		//login
 		Route::post('/login', [AdminAuthController::class, 'login']);
@@ -60,7 +60,7 @@ Route::name('admin.')->prefix('admin')->group(function () {
 		Route::post('/logout', [AdminAuthController::class, 'logout'])->middleware('auth:sanctum');
 	});
 
-	//------------------- Profile control routes -----------------------;
+	//-------------------LINK  Profile control routes -----------------------;
 	Route::prefix('/profile')->middleware(['auth:sanctum', 'adminAuth'])->group(function () {
 		//get profile information
 		Route::get('/', [AdminProfileController::class, 'getProfileInfo']);
@@ -72,7 +72,7 @@ Route::name('admin.')->prefix('admin')->group(function () {
 		});
 	});
 
-	//------------------- Admins control routes -----------------------;
+	//-------------------LINK  Admins control routes -----------------------;
 	Route::prefix('/admins')->middleware(['auth:sanctum', 'adminAuth'])->group(function () {
 		//fetch admin roles
 		Route::get('/roles', [AdminsController::class, 'rolesList']);
@@ -97,7 +97,7 @@ Route::name('admin.')->prefix('admin')->group(function () {
 		Route::post('/delete', [AdminsController::class, 'deleteAdmin']);
 	});
 
-	//------------------- Users control routes -----------------------;
+	//-------------------LINK  Users control routes -----------------------;
 	Route::prefix('/users')->middleware(['auth:sanctum', 'adminAuth'])->group(function () {
 		//fetch list of all users
 		Route::get('/', [UsersController::class, 'usersList']);
@@ -109,4 +109,5 @@ Route::name('admin.')->prefix('admin')->group(function () {
 		Route::post('/delete', [UsersController::class, 'deleteUser']);
 	});
 });
+//#admin Routes !SECTION
 

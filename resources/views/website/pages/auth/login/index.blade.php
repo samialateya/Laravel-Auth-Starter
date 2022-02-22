@@ -55,7 +55,7 @@
 		<h6 class="mt-4 text-center">Or continue with</h6>
 		<div class="d-flex justify-content-around mt-2">
 			<a href="{{ route('website.social.redirect',['google']) }}" class="btn btn-block btn-danger">Google</a>
-			<a href="{{ route('website.social.redirect',['google']) }}" class="btn btn-block btn-primary">Facebook</a>
+			<a href="{{ route('website.social.redirect',['facebook']) }}" class="btn btn-block btn-primary">Facebook</a>
 		</div>
 		<!--#social login -->
 	</form>

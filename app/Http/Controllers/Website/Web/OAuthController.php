@@ -18,6 +18,9 @@ class OAuthController extends Controller
 			case 'google':
 				return Socialite::driver('google')->redirect();
 				break;
+			case 'facebook':
+				return Socialite::driver('facebook')->redirect();
+				break;
 			default:
 				return redirect()->route('website.homePage');
 				break;
@@ -27,26 +30,32 @@ class OAuthController extends Controller
 	//*execute OAuth provider login logic
 	public function handleProviderCallback($provider)
 	{
-		//check for a provider
+		//check for a provider and get user data
+		$user = [];
+		$OAuthDriver = "";
 		switch ($provider) {
 			case 'google':
 				$user = Socialite::driver('google')->user();
-				//*authenticate user
-				$this->authenticateUser($user);
-				//*redirect user to home page
-				return redirect()->route('website.homePage');
+				$OAuthDriver = "google";
 				break;
-			default:
-				return redirect()->route('website.homePage');
+			case 'facebook':
+				$user = Socialite::driver('facebook')->user();
+				$OAuthDriver = "facebook";
 				break;
 		}
+		$this->authenticateUser($user, $OAuthDriver);
+		//*redirect user to home page after authentication is done
+		return redirect()->route('website.homePage');
 	}
 
 	//*authenticate the user
-	private function authenticateUser($OauthUserInfo)
+	private function authenticateUser(Object $OauthUserInfo, String $OAuthDriver):void
 	{
 		//*catch the user from database
-		$user = User::where('google_id', $OauthUserInfo->id)->orWhere('email', $OauthUserInfo->email)->first();
+		$user = User::where('email', $OauthUserInfo->email)
+			->orWhere('google_id', $OauthUserInfo->id)
+			->orWhere('facebook_id', $OauthUserInfo->id)
+			->first();
 		//? create a new profile if the user is not exist in the database
 		if (!$user) {
 			//*create new user profile
@@ -57,12 +66,10 @@ class OAuthController extends Controller
 			//*update the avatar
 			$user->avatar = $OauthUserInfo->avatar;
 		}
-		//*update user google auth info
-		$user->google_id = $OauthUserInfo->id;
-		$user->google_token = $OauthUserInfo->token;
-		$user->refresh_token = $OauthUserInfo->refreshToken;
+		//*update user Oauth driver id
+		$user->{$OAuthDriver . '_id'} = $OauthUserInfo->id;
 		//?set email verified if the user is verified by google and not verified yet by us
-		if ($OauthUserInfo->user['verified_email'] && !$user->email_verified_at) {
+		if (isset($OauthUserInfo->user['verified_email']) && !$user->email_verified_at) {
 			$user->email_verified_at = now();
 		}
 		//*save the user information
