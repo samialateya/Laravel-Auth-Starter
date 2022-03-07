@@ -6,6 +6,7 @@
     "license": "MIT",
     "require": {
         "php": "^7.3|^8.0",
+        "facebook/graph-sdk": "^5.1",
         "fruitcake/laravel-cors": "^2.0",
         "google/apiclient": "^2.12.1",
         "guzzlehttp/guzzle": "^7.0.1",

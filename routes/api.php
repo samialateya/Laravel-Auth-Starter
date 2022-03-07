@@ -29,6 +29,8 @@ Route::prefix('user')->group(function () {
 	//------------------- Social login -----------------------;
 	//google login
 	Route::post('/google-login', [OAuthController::class, 'googleLogin']);
+	//facebook login
+	Route::post('/facebook-login', [OAuthController::class, 'facebookLogin']);
 
 	//-------------------LINK  Profile control routes -----------------------;
 	Route::prefix('/profile')->middleware('auth:sanctum')->group(function () {

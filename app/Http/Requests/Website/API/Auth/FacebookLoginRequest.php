@@ -4,28 +4,14 @@ namespace App\Http\Requests\Website\API\Auth;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class GoogleLoginRequest extends FormRequest
+class FacebookLoginRequest extends FormRequest
 {
-	/**
-	 * Determine if the user is authorized to make this request.
-	 *
-	 * @return bool
-	 */
-	public function authorize()
-	{
-		return true;
-	}
 
-	/**
-	 * Get the validation rules that apply to the request.
-	 *
-	 * @return array
-	 */
 	public function rules()
 	{
 		return [
-			'id_token' => 'required',
-			'email' => 'required | email',
+			'access_token' => 'required',
+			'email' => 'required',
 			'name' => 'nullable | min:3',
 			'image' => 'nullable | url',
 		];
@@ -34,7 +20,7 @@ class GoogleLoginRequest extends FormRequest
 	public function messages()
 	{
 		return [
-			'id_token.required' => 'ID Token is required.',
+			'access_token.required' => 'Access Token is required.',
 			'email.required' => 'Email is required.',
 			'name.min' => 'Name must be at least 3 characters.',
 			'image.url' => 'send image url.',
