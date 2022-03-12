@@ -8,7 +8,9 @@ It's  a [Laravel 8](https://laravel.com/docs) authentication markdown that will 
 - Form Request
 - API Resources
 - Auth Sanctum
-- Notifications
+- Notifications 
+- Social Login with socialite
+- API Endpoints to accomplish social login from mobile or frontend applications
 
 feel free to use it as a startup for your next Laravel project
 
@@ -21,6 +23,7 @@ User has the following features provided as Web and API
 - Login, Register, Update Profile
 - Forget Password functionality
 - Email Verification functionality
+- Social Login with google and facebook login
 - Protecting some routes against un verified emails
 - Protecting routes against admin sessions
 - Protecting some routes against guests
@@ -64,7 +67,10 @@ Run the initial migrations and seeders to create an admin account aside with adm
 php artisan db:seed
 ```
 
-Update your ENV file with the email driver credentials
+<b>
+	Update your ENV file with the email driver credentials<br>
+	and social login keys
+</b>
 
 lastly you need to setup and run the queue worker in order to send email in background.
 run the following commands and then update ENV QUEUE_CONNECTION=database
