@@ -39,7 +39,9 @@ class ProfileController extends Controller
 		$request->image->move(public_path(User::AVATAR_DISK_PATH), $avatarName);
 
 		//TODO remove the old picture if its exists
-		$user->avatar ? unlink(public_path(User::AVATAR_DISK_PATH) . $user->avatar) : '';
+		//?remove the image from the desk if the avatar is not taken from social media account
+		if($user->avatar && strpos($user->avatar, 'http') === false)
+			unlink(public_path(User::AVATAR_DISK_PATH) . $user->avatar);
 
 		//TODO store uploaded avatar name in to users table
 		$user->avatar = $avatarName;
